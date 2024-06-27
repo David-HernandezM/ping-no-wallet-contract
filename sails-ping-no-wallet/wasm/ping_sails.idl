@@ -1,0 +1,53 @@
+type PingEvent = enum {
+  Ping,
+  Pong,
+  Error: SignlessError,
+};
+
+type SignlessError = enum {
+  SignlessAccountHasInvalidSession,
+  SignlessAccountNotApproved,
+  SignlessAddressAlreadyEsists,
+  UserAddressAlreadyExists,
+  UserDoesNotHasSignlessAccount,
+  NoWalletAccountAlreadyExists,
+  NoWalletAccountDoesNotHasSignlessAccount,
+  SessionHasInvalidSignlessAccount,
+};
+
+type SignlessAccount = struct {
+  address: str,
+  encoded: str,
+  encoding: SignlessEncodingData,
+  meta: SignlessMetaData,
+};
+
+type SignlessEncodingData = struct {
+  content: struct { str, str },
+  encoding_type: struct { str, str },
+  version: str,
+};
+
+type SignlessMetaData = struct {
+  name: str,
+};
+
+type SignlessEvent = enum {
+  SignlessAccountSet,
+  Error: SignlessError,
+};
+
+constructor {
+  New : ();
+};
+
+service Ping {
+  Ping : (user_data: struct { opt actor_id, opt str }) -> PingEvent;
+  Pong : (user_data: struct { opt actor_id, opt str }) -> PingEvent;
+};
+
+service Signless {
+  BindSignlessDataToAddress : (user_address: actor_id, signless_data: SignlessAccount) -> SignlessEvent;
+  BindSignlessDataToNoWalletAccount : (no_wallet_account: str, signless_data: SignlessAccount) -> SignlessEvent;
+};
+

@@ -1,0 +1,19 @@
+[package]
+name = "ping-sails"
+documentation.workspace = true
+authors.workspace = true
+version.workspace = true
+license.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+sails-rtl.workspace = true
+ping-sails-app.workspace = true
+
+[build-dependencies] 
+ping-sails-app.workspace = true
+gwasm-builder.workspace = true
+sails-idl-gen.workspace = true

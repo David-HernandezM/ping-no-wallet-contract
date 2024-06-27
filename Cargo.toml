@@ -3,7 +3,7 @@ resolver = "2"
 # Keep in the lexicographic order!
 # Remove a member if it's used as a dependency in the workspace.
 members = [ 
-    "ping-no-wallet",
+    "ping-no-wallet", "sails-ping-no-wallet/app", "sails-ping-no-wallet/wasm",
 ]
 
 [workspace.package]
@@ -20,10 +20,11 @@ publish = false
 # Keep in the lexicographic order!
 
 ping-no-wallet-io.path = "ping-no-wallet/io"
+ping-sails-app.path = "sails-ping-no-wallet/app"
 
 # Gear
 
-galloc = "1.4.0"
+# galloc = "1.4.0"
 gcli = "1.4.0"
 gclient = "1.4.0"
 gcore = "1.4.0"
