@@ -3,8 +3,7 @@ use sails_rtl::{
     collections::BTreeMap
 };
 
-pub static mut SIGNLESS_ACCOUNTS: Option<ContractSignlessAccounts> = None;
-
+#[derive(Default)]
 pub struct ContractSignlessAccounts {
     pub signless_accounts_address_by_user_address: BTreeMap<ActorId, ActorId>,
     pub signless_accounts_address_by_no_wallet_name: BTreeMap<String, ActorId>,
@@ -123,17 +122,17 @@ impl ContractSignlessAccounts {
     
 }
 
-pub fn signless_accounts_state_mut() -> &'static mut ContractSignlessAccounts {
-    let state = unsafe { SIGNLESS_ACCOUNTS.as_mut() };
-    debug_assert!(state.is_some(), "State isn't initialized");
-    unsafe { state.unwrap_unchecked() }
-}
+// pub fn signless_accounts_state_mut() -> &'static mut ContractSignlessAccounts {
+//     let state = unsafe { SIGNLESS_ACCOUNTS.as_mut() };
+//     debug_assert!(state.is_some(), "State isn't initialized");
+//     unsafe { state.unwrap_unchecked() }
+// }
 
-pub fn signless_accounts_state_ref() -> &'static ContractSignlessAccounts {
-    let state = unsafe { SIGNLESS_ACCOUNTS.as_ref() };
-    debug_assert!(state.is_some(), "State isn't initialized");
-    unsafe { state.unwrap_unchecked() }
-}
+// pub fn signless_accounts_state_ref() -> &'static ContractSignlessAccounts {
+//     let state = unsafe { SIGNLESS_ACCOUNTS.as_ref() };
+//     debug_assert!(state.is_some(), "State isn't initialized");
+//     unsafe { state.unwrap_unchecked() }
+// }
 
 #[derive(Encode, Decode, TypeInfo, Clone)]
 #[codec(crate = sails_rtl::scale_codec)]
@@ -149,7 +148,7 @@ pub enum SignlessError {
     SessionHasInvalidSignlessAccount
 }
 
-#[derive(Encode, Decode, TypeInfo, Clone)]
+#[derive(Encode, Decode, TypeInfo, Clone, Default)]
 #[codec(crate = sails_rtl::scale_codec)]
 #[scale_info(crate = sails_rtl::scale_info)]
 pub struct SignlessAccount {
@@ -159,7 +158,7 @@ pub struct SignlessAccount {
     meta: SignlessMetaData
 }
 
-#[derive(Encode, Decode, TypeInfo, Clone)]
+#[derive(Encode, Decode, TypeInfo, Clone, Default)]
 #[codec(crate = sails_rtl::scale_codec)]
 #[scale_info(crate = sails_rtl::scale_info)]
 pub struct SignlessEncodingData {
@@ -168,7 +167,7 @@ pub struct SignlessEncodingData {
     version: String
 }
 
-#[derive(Encode, Decode, TypeInfo, Clone)]
+#[derive(Encode, Decode, TypeInfo, Clone, Default)]
 #[codec(crate = sails_rtl::scale_codec)]
 #[scale_info(crate = sails_rtl::scale_info)]
 pub struct SignlessMetaData {

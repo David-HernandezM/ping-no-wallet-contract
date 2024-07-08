@@ -1,0 +1,17 @@
+[package]
+name = "contract-test"
+documentation.workspace = true
+authors.workspace = true
+version.workspace = true
+license.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+sails-rtl.workspace = true
+contract-test-app.workspace = true
+
+[build-dependencies] 
+contract-test-app.workspace = true
+gwasm-builder.workspace = true
+sails-idl-gen.workspace = true

@@ -15,6 +15,12 @@ type SignlessError = enum {
   SessionHasInvalidSignlessAccount,
 };
 
+type QueryEvent = enum {
+  LastWhoCall: actor_id,
+  SignlessAccountAddress: opt actor_id,
+  SignlessAccountData: opt SignlessAccount,
+};
+
 type SignlessAccount = struct {
   address: str,
   encoded: str,
@@ -44,6 +50,13 @@ constructor {
 service Ping {
   Ping : (user_data: struct { opt actor_id, opt str }) -> PingEvent;
   Pong : (user_data: struct { opt actor_id, opt str }) -> PingEvent;
+};
+
+service Query {
+  query LastWhoCall : () -> QueryEvent;
+  query SignlessAccountData : (signless_address: actor_id) -> QueryEvent;
+  query SignlessAddressFromNoWalletAccount : (no_wallet_account: str) -> QueryEvent;
+  query SignlessAddressFromUserAddress : (user_address: actor_id) -> QueryEvent;
 };
 
 service Signless {

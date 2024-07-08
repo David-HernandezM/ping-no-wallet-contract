@@ -3,7 +3,11 @@ resolver = "2"
 # Keep in the lexicographic order!
 # Remove a member if it's used as a dependency in the workspace.
 members = [ 
-    "ping-no-wallet", "sails-ping-no-wallet/app", "sails-ping-no-wallet/wasm",
+    # "contract-test/app", 
+    # "contract-test/wasm", 
+    "ping-no-wallet", 
+    "sails-ping-no-wallet/app", 
+    "sails-ping-no-wallet/wasm",
 ]
 
 [workspace.package]
@@ -21,6 +25,7 @@ publish = false
 
 ping-no-wallet-io.path = "ping-no-wallet/io"
 ping-sails-app.path = "sails-ping-no-wallet/app"
+# contract-test-app.path = "contract-test/app"
 
 # Gear
 
